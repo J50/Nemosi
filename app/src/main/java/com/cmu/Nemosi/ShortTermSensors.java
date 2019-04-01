@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
+import android.content.pm.PackageManager;
 
 //this activity will contain work from the STM team. Eventually, this activity will be removed and sub activities will be launched from main
 
@@ -27,13 +27,17 @@ public class ShortTermSensors extends AppCompatActivity {
                 //find my stuff button
 
 
-                String command = "ask Tile to find my keys";
+//                String command = "ask Tile to find my keys";
 //                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-                Intent intent = new Intent(Intent.ACTION_VOICE_COMMAND);
-//                intent.setClassName("com.google.android.googlequicksearchbox", "com.google.android.googlequicksearchbox.SearchActivity");
-                intent.putExtra("query", command);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //necessary if launching from Service
+//                Intent intent = new Intent(Intent.ACTION_VOICE_COMMAND);
+////                intent.setClassName("com.google.android.googlequicksearchbox", "com.google.android.googlequicksearchbox.SearchActivity");
+//                intent.putExtra("query", command);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //necessary if launching from Service
+//                startActivity(intent);
+
+                Intent intent = getPackageManager().getLaunchIntentForPackage("com.thetileapp.tile");
                 startActivity(intent);
+
 
 
             }
