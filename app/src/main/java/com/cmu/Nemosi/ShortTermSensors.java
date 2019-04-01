@@ -28,8 +28,9 @@ public class ShortTermSensors extends AppCompatActivity {
 
 
                 String command = "ask Tile to find my keys";
-                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-                intent.setClassName("com.google.android.googlequicksearchbox", "com.google.android.googlequicksearchbox.SearchActivity");
+//                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+                Intent intent = new Intent(Intent.ACTION_VOICE_COMMAND);
+//                intent.setClassName("com.google.android.googlequicksearchbox", "com.google.android.googlequicksearchbox.SearchActivity");
                 intent.putExtra("query", command);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //necessary if launching from Service
                 startActivity(intent);
