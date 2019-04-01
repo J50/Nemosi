@@ -27,8 +27,24 @@ public class ShortTermSensors extends AppCompatActivity {
                 //find my stuff button
 
 
-                //manu start writing logic here
+                String command = "ask Tile to find my keys";
+                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+                intent.setClassName("com.google.android.googlequicksearchbox", "com.google.android.googlequicksearchbox.SearchActivity");
+                intent.putExtra("query", command);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //necessary if launching from Service
+                startActivity(intent);
 
+
+            }
+        });
+
+        final Button button_test = findViewById(R.id.button_test);
+        button_test.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+
+                Intent i = new Intent(getApplicationContext(), DailyTest.class);
+                startActivity(i);
             }
         });
     }
