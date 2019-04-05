@@ -27,7 +27,18 @@ public class Generator {
 
         eraseCells(grid, numberOfEmptyCells);
 
+        prepareGridPuzzle(grid);
+
         return grid;
+    }
+
+    public void prepareGridPuzzle(Grid grid) {
+        for (int i = 0; i < grid.getSize(); i++) {
+            for (int j = 0; j < grid.getSize(); j++) {
+                grid.getCell(i, j).setInitialVal(grid.getCell(i, j).getValue() != 0);
+            }
+        }
+        return;
     }
 
     private void eraseCells(Grid grid, int numberOfEmptyCells) {
@@ -39,6 +50,7 @@ public class Generator {
             Grid.Cell cell = grid.getCell(randomRow, randomColumn);
             if (!cell.isEmpty()) {
                 cell.setValue(0);
+                cell.setInitialVal(false);
             } else {
                 i--;
             }

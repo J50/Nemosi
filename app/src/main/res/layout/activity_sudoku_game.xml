@@ -8,16 +8,34 @@
 
     <GridView
         android:id="@+id/gameBoard"
-        android:layout_width="395dp"
-        android:layout_height="395dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="100dp"
         android:background="@color/colorPrimary"
-        android:horizontalSpacing="2dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:horizontalSpacing="3dp"
         android:numColumns="9"
-        android:verticalSpacing="2dp"
+        android:verticalSpacing="3dp"
         android:visibility="visible"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.9" />
+
+    <GridView
+        android:id="@+id/numBoard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:horizontalSpacing="3dp"
+        android:numColumns="9"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/gameBoard"
+        app:layout_constraintTop_toBottomOf="@+id/gameBoard"
+        app:layout_constraintWidth_percent="0.9" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

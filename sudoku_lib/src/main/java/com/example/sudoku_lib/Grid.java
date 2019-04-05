@@ -40,7 +40,7 @@ public class Grid {
         Cell lastCell = null;
         for (int row = 0; row < grid.length; row++) {
             for (int column = 0; column < grid[row].length; column++) {
-                Cell cell = new Cell(grid[row][column]);
+                Cell cell = new Cell(grid[row][column], false);
                 cells[row][column] = cell;
 
                 rows.get(row).add(cell);
@@ -83,6 +83,7 @@ public class Grid {
 
         return new Grid(cells);
     }
+
 
     /**
      * A static factory method which returns an empty Grid.
@@ -138,6 +139,43 @@ public class Grid {
     }
 
     /**
+     * Returns the first empty {@link Cell} of this Grid. <br><br> Note: The result is wrapped by an
+     * {@link Optional}.
+     *
+     * @return a non-null value containing the first empty {@link Cell} if present
+     */
+    public Optional<Cell> getFirstEmptyCell() {
+        Cell firstCell = grid[0][0];
+        if (firstCell.isEmpty()) {
+            return Optional.of(firstCell);
+        }
+
+        return getNextEmptyCellOf(firstCell);
+    }
+
+    /**
+     * Returns the next empty {@link Cell} consecutively to the given {@link Cell} in this Grid.
+     * <br><br> Note: The result is wrapped by an {@link Optional}.
+     *
+     * @param cell the {@link Cell} of which the next empty {@link Cell} should be obtained
+     * @return a non-null value containing the next empty {@link Cell} if present
+     */
+    public Optional<Cell> getNextEmptyCellOf(Cell cell) {
+        Cell nextEmptyCell = null;
+
+        while ((cell = cell.getNextCell()) != null) {
+            if (!cell.isEmpty()) {
+                continue;
+            }
+
+            nextEmptyCell = cell;
+            break;
+        }
+
+        return Optional.ofNullable(nextEmptyCell);
+    }
+
+    /**
      * Checks if a given value is valid for a certain {@link Cell}. <br><br> A value is valid if it
      * does not already exist in the same row, column and box.
      *
@@ -179,42 +217,6 @@ public class Grid {
         return boxValues;
     }
 
-    /**
-     * Returns the first empty {@link Cell} of this Grid. <br><br> Note: The result is wrapped by an
-     * {@link Optional}.
-     *
-     * @return a non-null value containing the first empty {@link Cell} if present
-     */
-    public Optional<Cell> getFirstEmptyCell() {
-        Cell firstCell = grid[0][0];
-        if (firstCell.isEmpty()) {
-            return Optional.of(firstCell);
-        }
-
-        return getNextEmptyCellOf(firstCell);
-    }
-
-    /**
-     * Returns the next empty {@link Cell} consecutively to the given {@link Cell} in this Grid.
-     * <br><br> Note: The result is wrapped by an {@link Optional}.
-     *
-     * @param cell the {@link Cell} of which the next empty {@link Cell} should be obtained
-     * @return a non-null value containing the next empty {@link Cell} if present
-     */
-    public Optional<Cell> getNextEmptyCellOf(Cell cell) {
-        Cell nextEmptyCell = null;
-
-        while ((cell = cell.getNextCell()) != null) {
-            if (!cell.isEmpty()) {
-                continue;
-            }
-
-            nextEmptyCell = cell;
-            break;
-        }
-
-        return Optional.ofNullable(nextEmptyCell);
-    }
 
     /**
      * Returns a {@link String} representation of this Grid.
@@ -235,9 +237,13 @@ public class Grid {
         private Collection<Cell> columnNeighbors;
         private Collection<Cell> boxNeighbors;
         private Cell nextCell;
+        private boolean isInitialVal;
+        private boolean isHighlighted;
 
-        public Cell(int value) {
+        public Cell(int value, boolean isInitialVal) {
             this.value = value;
+            this.isInitialVal = isInitialVal;
+            this.isHighlighted = false;
         }
 
         /**
@@ -266,6 +272,22 @@ public class Grid {
          */
         public void setValue(int value) {
             this.value = value;
+        }
+
+        public boolean isInitialVal() {
+            return this.isInitialVal;
+        }
+
+        public void setInitialVal(boolean initial) {
+            this.isInitialVal = initial;
+        }
+
+        public boolean isHighlighted() {
+            return this.isHighlighted;
+        }
+
+        public void setHighlighted(boolean isHighlighted) {
+            this.isHighlighted = isHighlighted;
         }
 
         /**
