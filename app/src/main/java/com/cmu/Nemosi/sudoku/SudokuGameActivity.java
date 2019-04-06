@@ -2,6 +2,7 @@ package com.cmu.Nemosi.sudoku;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,7 +15,11 @@ import android.widget.Toast;
 import com.cmu.Nemosi.R;
 import com.example.sudoku_lib.*;
 
+import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SudokuGameActivity extends AppCompatActivity {
 
@@ -36,6 +41,9 @@ public class SudokuGameActivity extends AppCompatActivity {
         int position;
     }
 
+    private int numEmptyCells;
+    private long startTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,10 +60,9 @@ public class SudokuGameActivity extends AppCompatActivity {
             1: medium - 45 empty cells
             2: hard - 55 empty cells
          */
-        int numEmptyCells;
         switch (difficulty) {
             case 0:
-                numEmptyCells = 35;
+                numEmptyCells = 5;
                 break;
             case 1:
                 numEmptyCells = 45;
@@ -63,7 +70,6 @@ public class SudokuGameActivity extends AppCompatActivity {
             default:
                 numEmptyCells = 55;
         }
-
 
         Generator generator = new Generator();
         gameGrid = generator.generate(numEmptyCells);
@@ -85,7 +91,7 @@ public class SudokuGameActivity extends AppCompatActivity {
                 }
                 else
                     prevSelection.cell = null;
-                Toast.makeText(getApplicationContext(),"pressed "+cell.getValue(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),"pressed "+cell.getValue(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -99,14 +105,70 @@ public class SudokuGameActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Grid.Cell cell = numGrid.get(position);
+                Grid.Cell prev = prevSelection.cell;
                 if (prevSelection.cell != null) {
-                    prevSelection.cell.setValue(cell.getValue());
-                    updateCellHighlight(prevSelection.cell, prevSelection.position, false);
-                    prevSelection.cell = null;
+                    if (!gameGrid.isValidValueForCell(prev, cell.getValue()))
+                        Toast.makeText(getApplicationContext(),"repeated value", Toast.LENGTH_SHORT).show();
+                    else {
+                        if (prev.getValue() == 0 && cell.getValue() != 0)
+                            numEmptyCells--;
+                        else if (prev.getValue() != 0 && cell.getValue() == 0)
+                            numEmptyCells++;
+                        prev.setValue(cell.getValue());
+                        updateCellHighlight(prev, prevSelection.position, false);
+                        prev = null;
+                        if (checkBoard(numEmptyCells)) {
+                            finishGame();
+                            return;
+                        }
+                    }
                 }
-                Toast.makeText(getApplicationContext(),"pressed "+cell.getValue(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),"pressed "+cell.getValue(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        Timer updateTimer = new Timer("update");
+        updateTimer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                return;
+            }
+        }, 0, 1000);
+        startTime = System.currentTimeMillis();
+
+    }
+
+    private void finishGame() {
+        long currentTime = System.currentTimeMillis() - startTime;
+        SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
+        Toast.makeText(getApplicationContext(),"game finished in "+sdf.format(currentTime), Toast.LENGTH_LONG).show();
+        Intent i = new Intent(getApplicationContext(), SudokuMainActivity.class);
+        startActivity(i);
+        return;
+    }
+
+    private boolean checkBoard(int numEmptyCells) {
+        if (numEmptyCells != 0)
+            return false;
+        return checkRows() && checkCols() && checkBoxes();
+    }
+
+    private boolean checkRows(){
+//        int[] nums = new int[9];
+//        for (int j = 0; j < gameGrid.getSize(); j++) {
+//
+//            for (int i = 0; i < gameGrid.getSize(); i++) {
+//
+//            }
+//        }
+        return true;
+    }
+
+    private boolean checkCols() {
+        return true;
+    }
+
+    private boolean checkBoxes() {
+        return true;
     }
 
     private void updateCellHighlight(Grid.Cell cell, int position, boolean hilight) {
@@ -132,6 +194,7 @@ public class SudokuGameActivity extends AppCompatActivity {
         for (int i = 0; i < GRID_SIZE; i++) {
             grid.add(new Grid.Cell(i+1, false));
         }
+        grid.add(new Grid.Cell(0, false));
         return grid;
     }
 
