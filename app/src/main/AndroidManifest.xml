@@ -11,6 +11,12 @@
         android:theme="@style/AppTheme">
         <activity android:name=".sudoku.SudokuGameActivity"></activity>
         <activity android:name=".sudoku.SudokuMainActivity" />
+        <activity android:name=".GaaMainActivity"
+                  android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity android:name=".DailyTest" />
         <activity android:name=".ShortTermSensors" />
         <activity android:name=".MainActivity">
@@ -20,6 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.ShortTermSensors" />
     </application>
 
 </manifest>
