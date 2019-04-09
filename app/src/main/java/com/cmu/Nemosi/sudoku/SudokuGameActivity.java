@@ -43,13 +43,14 @@ public class SudokuGameActivity extends AppCompatActivity {
 
     private int numEmptyCells;
     private long startTime;
+    private int difficulty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sudoku_game);
         Bundle b = getIntent().getExtras();
-        int difficulty = b.getInt("difficulty");
+        difficulty = b.getInt("difficulty");
 
         gameGridView = (GridView) findViewById(R.id.gameBoard);
         numGridView = (GridView) findViewById(R.id.numBoard);
@@ -62,7 +63,7 @@ public class SudokuGameActivity extends AppCompatActivity {
          */
         switch (difficulty) {
             case 0:
-                numEmptyCells = 5;
+                numEmptyCells = 35;
                 break;
             case 1:
                 numEmptyCells = 45;
@@ -141,9 +142,36 @@ public class SudokuGameActivity extends AppCompatActivity {
         long currentTime = System.currentTimeMillis() - startTime;
         SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
         Toast.makeText(getApplicationContext(),"game finished in "+sdf.format(currentTime), Toast.LENGTH_LONG).show();
+        reportScore(currentTime);
         Intent i = new Intent(getApplicationContext(), SudokuMainActivity.class);
         startActivity(i);
         return;
+    }
+
+    private void reportScore(long timeMili) {
+        float time = timeMili / 1000f / 60f;
+        float bestTime;
+        int score;
+        switch (difficulty) {
+            case 0:
+                bestTime = 2;
+                break;
+            case 1:
+                bestTime = 5;
+                break;
+            default:
+                bestTime = 10;
+        }
+        if (time < bestTime) {
+            score = 100;
+        }
+        else {
+            score = 100 - (int)((time - bestTime) * 5);
+            if (score < 0)
+                score = 0;
+        }
+        // report score below
+        Toast.makeText(getApplicationContext(),"score: "+score, Toast.LENGTH_LONG).show();
     }
 
     private boolean checkBoard(int numEmptyCells) {

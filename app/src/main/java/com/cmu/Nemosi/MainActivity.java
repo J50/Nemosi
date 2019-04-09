@@ -30,11 +30,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final Button sudoku = findViewById(R.id.sudokuMain);
+        final Button sudoku = findViewById(R.id.gaamain);
         sudoku.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                Intent i = new Intent(getApplicationContext(), SudokuMainActivity.class);
+                Intent i = new Intent(getApplicationContext(), GaaMainActivity.class);
                 startActivity(i);
             }
         });
