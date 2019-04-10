@@ -24,8 +24,24 @@
         android:id="@+id/sudokuMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="68dp"
         android:gravity="center"
         android:text="sudoku"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="109dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gaaSelectPrompt" />
+
+    <Button
+        android:id="@+id/proceduralMemory"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginLeft="116dp"
+        android:layout_marginTop="72dp"
+        android:gravity="center"
+        android:text="procedural memory"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sudokuMain" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

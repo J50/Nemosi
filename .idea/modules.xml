@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Nemosi.iml" filepath="$PROJECT_DIR$/Nemosi.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sudoku_board_lib/sudoku_board_lib.iml" filepath="$PROJECT_DIR$/sudoku_board_lib/sudoku_board_lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sudoku_lib/sudoku_lib.iml" filepath="$PROJECT_DIR$/sudoku_lib/sudoku_lib.iml" />
     </modules>
   </component>
 </project>
