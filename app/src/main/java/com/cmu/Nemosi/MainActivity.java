@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.cmu.Nemosi.sudoku.SudokuMainActivity;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +26,15 @@ public class MainActivity extends AppCompatActivity {
                 // Code here executes on main thread after user presses button
 
                 Intent i = new Intent(getApplicationContext(), ShortTermSensors.class);
+                startActivity(i);
+            }
+        });
+
+        final Button sudoku = findViewById(R.id.gaamain);
+        sudoku.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                Intent i = new Intent(getApplicationContext(), GaaMainActivity.class);
                 startActivity(i);
             }
         });
