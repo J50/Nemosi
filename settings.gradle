@@ -1,1 +1,1 @@
-include ':app', ':sudoku_lib', ':sudoku_board_lib'
+include ':app', ':sudoku_lib', ':sudoku_board_lib', ':fliclib'

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.cmu.Nemosi">
+    <uses-sdk tools:overrideLibrary="io.flic.lib" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
 
     <application
         android:allowBackup="true"
@@ -9,7 +13,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".stepsOrdering.StepsOrdering"></activity>
+        <activity
+            android:name=".FindStuffPrompt"
+            android:showOnLockScreen="true"
+            android:screenOrientation="sensorPortrait"
+            android:label="@string/title_activity_find_stuff_prompt"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".FlicButtonSetup"
+            android:label="@string/title_activity_flic_button_setup"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <receiver
+            android:name=".FlicReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="io.flic.FLICLIB_EVENT" />
+            </intent-filter>
+        </receiver>
+        <activity android:name=".stepsOrdering.StepsOrdering" />
         <activity android:name=".sudoku.SudokuGameActivity" />
         <activity android:name=".sudoku.SudokuMainActivity" />
         <activity

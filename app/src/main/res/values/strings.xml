@@ -3,4 +3,6 @@
     <string name="gaa_select_prompt">Please select a game</string>
     <string name="correct">Correct</string>
     <string name="wrong">Wrong</string>
+    <string name="title_activity_find_stuff_prompt">FindStuffPrompt</string>
+    <string name="title_activity_flic_button_setup">FlicButtonSetup</string>
 </resources>

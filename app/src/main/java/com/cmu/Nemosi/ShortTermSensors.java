@@ -24,21 +24,9 @@ public class ShortTermSensors extends AppCompatActivity {
         final Button button = findViewById(R.id.button_findMyStuff);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //find my stuff button
-
-
-//                String command = "ask Tile to find my keys";
-//                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-//                Intent intent = new Intent(Intent.ACTION_VOICE_COMMAND);
-////                intent.setClassName("com.google.android.googlequicksearchbox", "com.google.android.googlequicksearchbox.SearchActivity");
-//                intent.putExtra("query", command);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //necessary if launching from Service
-//                startActivity(intent);
 
                 Intent intent = getPackageManager().getLaunchIntentForPackage("com.thetileapp.tile");
                 startActivity(intent);
-
-
 
             }
         });
@@ -50,6 +38,16 @@ public class ShortTermSensors extends AppCompatActivity {
 
                 Intent i = new Intent(getApplicationContext(), DailyTest.class);
                 startActivity(i);
+            }
+        });
+
+        final Button button_flicSetup = findViewById(R.id.button_flicSetup);
+        button_flicSetup.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                Intent i = new Intent(getApplicationContext(), FlicButtonSetup.class);
+                startActivity(i);
+
             }
         });
     }

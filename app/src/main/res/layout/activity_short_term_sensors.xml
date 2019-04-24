@@ -14,12 +14,18 @@
         android:id="@+id/button_findMyStuff"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="Find keys" />
+        android:text="Find items" />
 
     <Button
         android:id="@+id/button_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start Daily Test" />
+
+    <Button
+        android:id="@+id/button_flicSetup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set up Flic Buttons" />
 
 </LinearLayout>
